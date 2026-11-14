@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>vibes hub</title>
+  <meta name="description" content="A gallery of vibe coded projects." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✺</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="top">
+    <h1 class="wordmark"><span id="title">vibes hub</span><span class="spark" aria-hidden="true">✺</span></h1>
+    <p class="tagline" id="tagline"></p>
+    <div class="meta-row">
+      <span class="count" id="count"></span>
+      <a class="gh" id="ghlink" href="#" target="_blank" rel="noopener">github ↗</a>
+    </div>
+  </header>
+
+  <nav class="controls" aria-label="Filter projects">
+    <input id="search" type="search" placeholder="search…" autocomplete="off" />
+    <div class="chips" id="chips"></div>
+    <div class="sort" role="group" aria-label="Sort">
+      <button data-sort="updated" class="on">fresh</button>
+      <button data-sort="created">newest</button>
+      <button data-sort="title">a–z</button>
+    </div>
+  </nav>
+
+  <main id="grid" class="grid" aria-live="polite"></main>
+  <p class="empty" id="empty" hidden>Nothing matches. Try another vibe.</p>
+
+  <footer class="foot">
+    <span>made by vibes · updated <span id="generated"></span></span>
+  </footer>
+
+  <template id="card-tpl">
+    <article class="card">
+      <a class="cover" target="_blank" rel="noopener">
+        <img alt="" loading="lazy" />
+        <span class="emoji" aria-hidden="true"></span>
+        <span class="play">open ↗</span>
+      </a>
+      <div class="body">
+        <h2><a class="title" target="_blank" rel="noopener"></a></h2>
+        <p class="desc"></p>
+        <div class="foot-row">
+          <span class="when"></span>
+          <a class="code" target="_blank" rel="noopener">code</a>
+        </div>
+        <ul class="tags"></ul>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

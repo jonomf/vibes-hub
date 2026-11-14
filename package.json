@@ -1,0 +1,13 @@
+{
+  "name": "vibes-hub",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "thumbs": "node scripts/screenshot.mjs",
+    "serve": "npx --yes serve site"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}

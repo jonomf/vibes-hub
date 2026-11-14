@@ -1,0 +1,20 @@
+{
+  "owner": "jonomf",
+  "title": "vibes hub",
+  "tagline": "Things I've vibe coded. Click one and poke at it.",
+
+  "_how_it_works": "Every public repo of yours with GitHub Pages turned on shows up here automatically. Use the settings below to hide repos, override titles/descriptions/emoji, feature favorites, or add pages that live somewhere else.",
+
+  "require_topic": null,
+
+  "exclude": ["vibes-hub"],
+
+  "projects": {
+    "time-chess": { "emoji": "♟️" },
+    "tower-rts": { "title": "Tower RTS", "emoji": "🏰" },
+    "book-graph": { "emoji": "📚" },
+    "auto-rts-vibes": { "title": "Auto RTS", "emoji": "⚔️" }
+  },
+
+  "extra": []
+}
