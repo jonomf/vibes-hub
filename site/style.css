@@ -118,6 +118,7 @@ a { color: inherit; }
   inset: auto auto 12px 12px; font-size: 28px; width: 46px; height: 46px;
   background: #0009; border-radius: 12px; backdrop-filter: blur(6px);
 }
+.emoji:empty { display: none; }
 .emoji .initial { font-family: var(--display); font-weight: 800; font-size: 96px; color: #fff; opacity: .9; letter-spacing: -.05em; }
 .play {
   position: absolute; right: 12px; bottom: 12px;
