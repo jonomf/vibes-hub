@@ -68,7 +68,30 @@ function render() {
   $("#count").textContent = `${all.length} project${all.length === 1 ? "" : "s"}`;
   $("#empty").hidden = list.length > 0;
 
-  list.forEach((p, i) => grid.append(card(p, i)));
+  // In "all" (no kind picked), show each kind in its own section.
+  const order = ["web", "android"];
+  const groups = [...new Set([...order, ...list.map((p) => p.kind || "web")])]
+    .map((k) => [k, list.filter((p) => (p.kind || "web") === k)])
+    .filter(([, items]) => items.length);
+  const sectioned = !state.kind && groups.length > 1;
+  const groupTitle = { web: "🌐 On the web", android: "📱 Android apps" };
+  let i = 0;
+  for (const [k, items] of sectioned ? groups : [[null, list]]) {
+    const sec = document.createElement("section");
+    sec.className = "group";
+    if (sectioned) {
+      const h = document.createElement("h2");
+      h.className = "group-head";
+      h.innerHTML = `<span></span><small>${items.length}</small>`;
+      h.firstChild.textContent = groupTitle[k] || k;
+      sec.append(h);
+    }
+    const g = document.createElement("div");
+    g.className = "grid";
+    items.forEach((p) => g.append(card(p, i++)));
+    sec.append(g);
+    grid.append(sec);
+  }
 }
 
 function card(p, i) {
