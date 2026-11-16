@@ -38,6 +38,9 @@ jobs:
           npx playwright install --with-deps chromium
           node scripts/screenshot.mjs
 
+      - name: Cache-bust CSS/JS so new HTML never pairs with stale files
+        run: sed -i "s/?v=dev/?v=${GITHUB_SHA::7}/g" site/index.html
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
