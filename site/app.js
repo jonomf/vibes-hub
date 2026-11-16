@@ -74,7 +74,7 @@ function render() {
     .map((k) => [k, list.filter((p) => (p.kind || "web") === k)])
     .filter(([, items]) => items.length);
   const sectioned = !state.kind && groups.length > 1;
-  const groupTitle = { web: "🌐 On the web", android: "📱 Android apps" };
+  const groupTitle = { web: "🌐 In the browser", android: "📱 Android widgets" };
   let i = 0;
   for (const [k, items] of sectioned ? groups : [[null, list]]) {
     const sec = document.createElement("section");
