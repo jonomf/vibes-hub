@@ -5,7 +5,7 @@
   "_how_it_works": "Every public repo of yours with GitHub Pages turned on shows up here automatically. Android apps are listed below under \"android\" (by repo name); their cards link to the latest release. Use the other settings to hide repos, override titles/descriptions/emoji, feature favorites, or add pages that live somewhere else.",
   "require_topic": null,
   "exclude": [
-    "vibes-hub"
+    "vibes-hub", "word-match", "resta-fichas"
   ],
   "projects": {
     "time-chess": {
