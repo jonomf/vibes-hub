@@ -75,11 +75,39 @@ for (const r of repos) {
     url: o.url || (await pagesUrl(r)),
     repoUrl: r.html_url,
     topics: o.tags || (r.topics || []).filter((t) => t !== config.require_topic),
+    kind: "web",
     emoji: o.emoji || null,
     image: o.image || null,
     featured: !!o.featured,
     created: r.created_at,
     updated: r.pushed_at,
+  });
+}
+
+// Android apps: listed by repo name in vibes.json. Main link = latest release (the APK).
+const reposByName = new Map(repos.map((r) => [r.name, r]));
+for (const a of config.android || []) {
+  if (!a.repo) continue;
+  let r = reposByName.get(a.repo);
+  if (!r && !process.env.VIBES_FAKE_REPOS) {
+    try { r = await gh(`/repos/${owner}/${a.repo}`); } catch {} // private repos aren't visible; that's fine
+  }
+  const isPrivate = a.private ?? (!r || r.private);
+  const repoUrl = `https://github.com/${owner}/${a.repo}`;
+  projects.push({
+    id: a.repo,
+    title: a.title || titleCase(a.repo),
+    description: a.description ?? r?.description ?? "",
+    url: a.url || `${repoUrl}/releases/latest`,
+    repoUrl: isPrivate ? null : repoUrl,
+    topics: a.tags || (r?.topics || []),
+    kind: "android",
+    private: isPrivate,
+    emoji: a.emoji || "📱",
+    image: a.image || null,
+    featured: !!a.featured,
+    created: r?.created_at || a.date || null,
+    updated: r?.pushed_at || a.date || null,
   });
 }
 
@@ -93,6 +121,7 @@ for (const e of config.extra || []) {
     url: e.url,
     repoUrl: e.repo || null,
     topics: e.tags || [],
+    kind: e.kind || "web",
     emoji: e.emoji || null,
     image: e.image || null,
     featured: !!e.featured,

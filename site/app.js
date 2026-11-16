@@ -10,20 +10,28 @@ $("#tagline").textContent = data.tagline || "";
 $("#ghlink").href = `https://github.com/${data.owner}`;
 $("#generated").textContent = ago(data.generated);
 
-const state = { q: "", tag: null, sort: "updated" };
+const state = { q: "", tag: null, kind: null, sort: "updated" };
 
 // tag chips, most common first
 const counts = {};
 all.forEach((p) => (p.topics || []).forEach((t) => (counts[t] = (counts[t] || 0) + 1)));
 const tags = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
 const chips = $("#chips");
-if (tags.length) {
-  for (const t of [null, ...tags]) {
+const kinds = [...new Set(all.map((p) => p.kind || "web"))];
+const kindLabel = { web: "🌐 web", android: "📱 android" };
+const options = [
+  { label: "all", kind: null, tag: null },
+  ...(kinds.length > 1 ? kinds.map((k) => ({ label: kindLabel[k] || k, kind: k, tag: null })) : []),
+  ...tags.map((t) => ({ label: t, kind: null, tag: t })),
+];
+if (options.length > 1) {
+  for (const o of options) {
     const b = document.createElement("button");
-    b.textContent = t ?? "all";
-    if (t === null) b.classList.add("on");
+    b.textContent = o.label;
+    if (o.label === "all") b.classList.add("on");
     b.onclick = () => {
-      state.tag = t;
+      state.tag = o.tag;
+      state.kind = o.kind;
       chips.querySelectorAll("button").forEach((x) => x.classList.toggle("on", x === b));
       render();
     };
@@ -47,6 +55,7 @@ function render() {
   grid.replaceChildren();
   let list = all.filter((p) => {
     if (state.tag && !(p.topics || []).includes(state.tag)) return false;
+    if (state.kind && (p.kind || "web") !== state.kind) return false;
     if (!state.q) return true;
     return [p.title, p.description, p.id, ...(p.topics || [])].join(" ").toLowerCase().includes(state.q);
   });
@@ -67,6 +76,11 @@ function card(p, i) {
   el.style.setProperty("--h", hue(p.id));
   el.style.setProperty("--i", i);
   if (p.featured) el.classList.add("featured");
+  const isApp = p.kind === "android";
+  if (isApp) {
+    el.classList.add("app");
+    el.querySelector(".play").textContent = "get apk ↗";
+  }
 
   const cover = el.querySelector(".cover");
   cover.href = p.url;
@@ -81,7 +95,10 @@ function card(p, i) {
   const emoji = el.querySelector(".emoji");
   function fillEmoji() {
     emoji.replaceChildren();
-    if (p.emoji) emoji.textContent = p.emoji;
+    if (isApp && !cover.classList.contains("has-img")) {
+      emoji.innerHTML = `<span class="phone"><span class="widget"><span class="wi"></span><span class="wl"></span><span class="wl s"></span></span><span class="dock"><i></i><i></i><i></i><i></i></span></span>`;
+      emoji.querySelector(".wi").textContent = p.emoji || "📱";
+    } else if (p.emoji) emoji.textContent = p.emoji;
     else if (!cover.classList.contains("has-img")) {
       const s = document.createElement("span");
       s.className = "initial";
@@ -95,7 +112,9 @@ function card(p, i) {
   title.textContent = p.title;
   title.href = p.url;
   el.querySelector(".desc").textContent = p.description || "";
-  el.querySelector(".when").textContent = p.updated ? `touched ${ago(p.updated)}` : "";
+  el.querySelector(".when").textContent =
+    [isApp ? "android" : null, p.private ? "private repo" : null, p.updated ? `touched ${ago(p.updated)}` : null]
+      .filter(Boolean).join(" · ");
   const code = el.querySelector(".code");
   if (p.repoUrl) code.href = p.repoUrl; else code.remove();
 

@@ -2,19 +2,58 @@
   "owner": "jonomf",
   "title": "vibes hub",
   "tagline": "Things I've vibe coded. Click one and poke at it.",
-
-  "_how_it_works": "Every public repo of yours with GitHub Pages turned on shows up here automatically. Use the settings below to hide repos, override titles/descriptions/emoji, feature favorites, or add pages that live somewhere else.",
-
+  "_how_it_works": "Every public repo of yours with GitHub Pages turned on shows up here automatically. Android apps are listed below under \"android\" (by repo name); their cards link to the latest release. Use the other settings to hide repos, override titles/descriptions/emoji, feature favorites, or add pages that live somewhere else.",
   "require_topic": null,
-
-  "exclude": ["vibes-hub"],
-
+  "exclude": [
+    "vibes-hub"
+  ],
   "projects": {
-    "time-chess": { "emoji": "♟️" },
-    "tower-rts": { "title": "Tower RTS", "emoji": "🏰" },
-    "book-graph": { "emoji": "📚" },
-    "auto-rts-vibes": { "title": "Auto RTS", "emoji": "⚔️" }
+    "time-chess": {
+      "emoji": "♟️"
+    },
+    "tower-rts": {
+      "title": "Tower RTS",
+      "emoji": "🏰"
+    },
+    "book-graph": {
+      "emoji": "📚"
+    },
+    "auto-rts-vibes": {
+      "title": "Auto RTS",
+      "emoji": "⚔️"
+    }
   },
-
+  "android": [
+    {
+      "repo": "audiobook-widget",
+      "title": "Media Widgets",
+      "emoji": "🎧",
+      "description": "Home-screen widgets for whatever's playing: audiobooks (Libby, Audible), YouTube Music, Pocket Casts, plus a Now Playing grid."
+    },
+    {
+      "repo": "todoist-widget",
+      "title": "Todoist Widget",
+      "emoji": "✅",
+      "description": "A resizable widget per Todoist project or filter, most overdue first, tap the circle to complete."
+    },
+    {
+      "repo": "now-widget",
+      "title": "Now",
+      "emoji": "⏱️",
+      "description": "One tap to say what you're doing right now. No timers: each tap ends the last thing."
+    },
+    {
+      "repo": "github-widget",
+      "title": "Repos Widget",
+      "emoji": "🐙",
+      "description": "My GitHub repos at a glance: latest CI run and commit, plus update chips for installed apps."
+    },
+    {
+      "repo": "widget-updater",
+      "title": "Widget Updater",
+      "emoji": "🔄",
+      "description": "Keeps all the widget apps up to date from their GitHub releases."
+    }
+  ],
   "extra": []
 }

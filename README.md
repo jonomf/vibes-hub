@@ -10,6 +10,16 @@ Every public repo of mine with Pages enabled shows up here automatically. The ga
 
 The card uses the repo's **description** and **topics** (set them in the "About" box on the repo's GitHub page), so a good description there is all most projects need.
 
+## Adding an Android app
+
+Add it to the `android` list in [`vibes.json`](vibes.json):
+
+```json
+{ "repo": "todoist-widget", "title": "Todoist Widget", "emoji": "✅", "description": "…" }
+```
+
+Its card shows a little phone with the emoji on it and links to the repo's latest release, where the APK is. Private repos are fine: the card hides the code link, and the release link only works for you while you're signed in to GitHub. Optional fields: `image` (a real screenshot URL), `tags`, `featured`.
+
 ## Tweaking things: `vibes.json`
 
 Edit [`vibes.json`](vibes.json) right on GitHub (pencil icon) to customize:

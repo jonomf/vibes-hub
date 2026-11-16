@@ -119,6 +119,34 @@ a { color: inherit; }
   background: #0009; border-radius: 12px; backdrop-filter: blur(6px);
 }
 .emoji:empty { display: none; }
+
+/* android app cards: a little phone with the widget on its home screen */
+.app .cover:not(.has-img) .emoji { align-items: end; }
+.phone {
+  position: relative; display: flex; flex-direction: column; justify-content: space-between;
+  width: 44%; aspect-ratio: 9 / 15; margin-bottom: -18%;
+  padding: 30px 10px 12px; border-radius: 22px 22px 0 0;
+  background: linear-gradient(160deg, hsl(var(--h) 45% 22% / .9), hsl(calc(var(--h) + 40) 40% 10% / .95));
+  border: 5px solid #0d0c0b; border-bottom: 0;
+  box-shadow: 0 20px 50px -10px #000a, inset 0 0 0 1px #fff1;
+  transition: transform .35s cubic-bezier(.2,.8,.2,1);
+}
+.phone::before {
+  content: ""; position: absolute; top: 7px; left: 50%; translate: -50% 0;
+  width: 26%; height: 6px; border-radius: 6px; background: #0d0c0b;
+}
+.card.app:hover .phone { transform: translateY(-8px); }
+.widget {
+  width: 100%; display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; gap: 6px 10px; align-items: center;
+  padding: 12px; border-radius: 16px;
+  background: hsl(var(--h) 30% 92% / .14); backdrop-filter: blur(4px);
+  border: 1px solid #fff2;
+}
+.wi { grid-row: span 2; font-size: 30px; line-height: 1; }
+.wl { width: 100%; height: 7px; border-radius: 4px; background: #fff8; }
+.wl.s { width: 60%; background: hsl(var(--h) 80% 70% / .7); }
+.dock { display: flex; justify-content: space-around; padding-bottom: 4px; }
+.dock i { width: 16%; aspect-ratio: 1; border-radius: 30%; background: #fff3; }
 .emoji .initial { font-family: var(--display); font-weight: 800; font-size: 96px; color: #fff; opacity: .9; letter-spacing: -.05em; }
 .play {
   position: absolute; right: 12px; bottom: 12px;
