@@ -25,9 +25,10 @@
   },
   "android": [
     {
-      "repo": "audiobook-widget",
+      "repo": "media-widget",
       "title": "Media Widgets",
       "emoji": "🎧",
+      "image": "https://raw.githubusercontent.com/jonomf/media-widget/main/docs/now-playing-4x1.png",
       "description": "Home-screen widgets for whatever's playing: audiobooks (Libby, Audible), YouTube Music, Pocket Casts, plus a Now Playing grid."
     },
     {
